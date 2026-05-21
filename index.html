@@ -76,26 +76,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
   <p>追踪游戏社区及泛社区产品的功能迭代，快速了解各平台在做什么</p>
   <div class="meta-row">
     <span>最近更新：2026年5月21日</span>
-    <span>收录 24 条</span>
     <span>覆盖 7 个平台</span>
   </div>
-  <div style="margin-top:14px;padding:10px 14px;background:var(--card);border-radius:8px;border:1px solid var(--border);font-size:12px;color:var(--text2);line-height:1.7;">
-    <div style="margin-bottom:4px;color:var(--text);font-weight:500;">这个页面能告诉你：</div>
-    各游戏社区/泛社区平台近期的功能迭代动态。按平台筛选查看，按关联程度排序（游戏社区优先）。<br>
-    <span style="color:var(--accent2);">官方</span> = 来自平台更新日志/官方文档，信息准确；
-    <span style="color:var(--orange);">媒体</span> = 来自外部媒体报道，供参考；
-    <span style="color:var(--yellow);">🔥</span> = 大平台新功能或高讨论度，值得重点关注。
+</div>
+
+<!-- 本周关注 - 紧跟header -->
+<div class="featured">
+  <div class="featured-title">本周关注</div>
+  <div class="featured-grid">
+    <div class="featured-card" onclick="window.open('https://nw.eastday.com/zq/zh/20260213/40be2fa0e6b97e7d8cbc935d3dde6b65.html')">
+      <div class="fc-source">TapTap · 官方发布</div>
+      <div class="fc-title">TapTap制造：自然语言生成可玩游戏Demo</div>
+      <div class="fc-desc">用户描述游戏创意→AI约5分钟生成可玩Demo→一键发布到平台。无需编程美术能力。</div>
+      <div class="fc-meta"><span>2026年2月</span><span style="color:var(--accent);">查看来源 →</span></div>
+    </div>
+    <div class="featured-card" onclick="window.open('https://www.36dianping.com/info/116127.html')">
+      <div class="fc-source">TapTap · 媒体报道</div>
+      <div class="fc-title">游戏内嵌社区：40%用户在游戏内使用社区功能</div>
+      <div class="fc-desc">通过TapSDK嵌入，玩家不离开游戏即可看好友动态、发帖互动。Flash Party实测数据。</div>
+      <div class="fc-meta"><span>2026年</span><span style="color:var(--accent);">查看来源 →</span></div>
+    </div>
+    <div class="featured-card" onclick="window.open('https://siit.co/guestposts/mobile-gaming-social-features-that-will-define-2026/')">
+      <div class="fc-source">行业趋势 · 外媒报告</div>
+      <div class="fc-title">AI社交匹配：互动成功率提升47%</div>
+      <div class="fc-desc">基于玩法偏好和行为数据的算法推荐队友/搭子，多平台验证互动成功率显著提升。</div>
+      <div class="fc-meta"><span>2026年</span><span style="color:var(--accent);">查看来源 →</span></div>
+    </div>
   </div>
 </div>
-
-<!-- 板块切换 -->
-<div class="tab-nav">
-  <div class="tab active" onclick="switchTab('features')">功能迭代</div>
-  <div class="tab" onclick="switchTab('trends')">社区热点</div>
-</div>
-
-<!-- ===== 板块1：功能迭代 ===== -->
-<div class="tab-content active" id="tab-features">
 
 <!-- 平台筛选 -->
 <div class="filter-row">
@@ -111,31 +119,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
   <button class="filter-btn" onclick="filterPlatform('Discord')">Discord</button>
 </div>
 
-<!-- 本周重点 -->
-<div class="featured">
-  <div class="featured-title">本周关注</div>
-  <div class="featured-grid">
-    <div class="featured-card">
-      <div class="fc-source">TapTap · 官方发布</div>
-      <div class="fc-title">TapTap制造：AI生成可玩游戏Demo</div>
-      <div class="fc-desc">用户用自然语言描述游戏，约5分钟生成可玩Demo，一键发布到平台。2026年2月上线。</div>
-      <div class="fc-meta"><span>🔥 高讨论度</span><span>2026.02</span></div>
-    </div>
-    <div class="featured-card">
-      <div class="fc-source">即刻 · 媒体报道</div>
-      <div class="fc-title">48小时限时日记：发完48h后自动隐藏</div>
-      <div class="fc-desc">日记帖对他人可见48小时后自动仅自己可见。降低发帖心理压力，留存率63%远超行业均值。</div>
-      <div class="fc-meta"><span>🔥 高讨论度</span><span>2025</span></div>
-    </div>
-    <div class="featured-card">
-      <div class="fc-source">小红书 · 媒体报道</div>
-      <div class="fc-title">共享收藏夹：最多10人协作收藏</div>
-      <div class="fc-desc">邀请好友共同收藏内容，解决"集体决策"场景。工具驱动社交关系建立。</div>
-      <div class="fc-meta"><span>2025-2026</span></div>
-    </div>
-  </div>
-</div>
-
 <!-- 全部卡片 -->
 <div class="grid" id="card-grid">
 
@@ -144,7 +127,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">社交功能</span>
     <h3>"搭子"轻社交系统</h3>
     <div class="desc">用户找游戏搭子，细分为"剧情讨论搭子""抽卡搭子""日常任务搭子"等。关系定位介于队友和朋友之间，强调低压力、有边界的连接。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://baijiahao.baidu.com/s?id=1841403662228401660" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="TapTap">
@@ -152,7 +135,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">互动机制</span>
     <h3>游戏内嵌社区动态（TapSDK）</h3>
     <div class="desc">通过SDK，玩家不离开游戏就能看到好友帖子和成就。Flash Party约40%玩家使用内嵌社区功能。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://www.36dianping.com/info/116127.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="TapTap">
@@ -160,7 +143,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">UGC工具</span>
     <h3>TapTap制造：AI游戏创作工具</h3>
     <div class="desc">2026年2月上线。用户用自然语言描述游戏→AI约5分钟生成可玩Demo。无需编程和美术能力，一键发布到平台。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：官方发布+36氪报道</div>
+    <div class="card-date">2026年2月 · <a href="https://nw.eastday.com/zq/zh/20260213/40be2fa0e6b97e7d8cbc935d3dde6b65.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="TapTap">
@@ -168,47 +151,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">内容形态</span>
     <h3>攻略模块：0.5%帖量吸引50%DAU</h3>
     <div class="desc">独立攻略板块虽帖子数量极少，但吸引平台一半日活用户。说明结构化实用内容需求远强于社交水贴。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：产品分析文章</div>
-  </div>
-
-  <div class="card" data-platform="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">激励体系</span>
-    <h3>米游币日常任务循环</h3>
-    <div class="desc">每天完成读帖、点赞、分享、签到赚币→兑换游戏物品或周边。月上限约7000币。形成"打开APP→做任务→获奖励"的强习惯循环。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：官方文档</div>
-  </div>
-
-  <div class="card" data-platform="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">UGC工具</span>
-    <h3>战绩卡片一键生成</h3>
-    <div class="desc">一键生成可分享的成就/深渊通关/探索进度图片卡。把"晒战绩"从截图+P图简化为一个按钮操作。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：官方功能</div>
-  </div>
-
-  <div class="card" data-platform="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">社交功能</span>
-    <h3>导师系统：老带新社交破冰</h3>
-    <div class="desc">连接老玩家和新玩家，提供新手引导+社交破冰。老玩家获"导师"身份认同，新玩家获归属感。</div>
-    <div class="card-date">收录：2026.05.20</div>
-  </div>
-
-  <div class="card" data-platform="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">UGC工具</span>
-    <h3>阵容模拟器：通关方案共享</h3>
-    <div class="desc">用户分享特定关卡通关阵容（含角色/武器/圣遗物），社区可评分、讨论、复用。按场景筛选。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://www.36dianping.com/info/116127.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="小黑盒">
     <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">UGC工具</span>
-    <h3>一键成就海报</h3>
+    <h3>一键成就海报生成</h3>
     <div class="desc">自动从Steam数据生成可分享视觉海报（徽章、游戏时长、成就进度）。极低创作成本的"炫耀"工具。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：官方功能</div>
+    <div class="card-date">2026年 · <a href="https://baike.baidu.com/item/%E5%B0%8F%E9%BB%91%E7%9B%92/22427592" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="小黑盒">
@@ -216,15 +167,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">激励体系</span>
     <h3>创作者三级认证 + "盒电"曝光加速</h3>
     <div class="desc">Lv3/5/7三级认证逐级解锁权益。创作者赚取"盒电"可推广自己文章曝光量。</div>
-    <div class="card-date">收录：2026.05.20</div>
-  </div>
-
-  <div class="card" data-platform="小黑盒">
-    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
-    <span class="card-dim">内容形态</span>
-    <h3>"探索模式"打破信息茧房</h3>
-    <div class="desc">算法刻意推荐用户平时不关注的游戏和话题，让用户接触多元内容。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://baike.baidu.com/item/%E5%B0%8F%E9%BB%91%E7%9B%92/22427592" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="好游快爆">
@@ -232,7 +175,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">互动机制</span>
     <h3>开发者直连论坛</h3>
     <div class="desc">玩家在专属论坛直接和游戏开发者沟通、反馈Bug、提建议。缩短反馈链路。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://www.downxia.com/downinfo/440565.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="好游快爆">
@@ -240,7 +183,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">运营活动</span>
     <h3>礼仪考试：游戏化社区治理</h3>
     <div class="desc">用户通过社区行为规范测试才能解锁特定社交功能。"参与前教育"替代"违规后惩罚"。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://www.downxia.com/downinfo/440565.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="好游快爆">
@@ -248,7 +191,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">激励体系</span>
     <h3>爆米花经济：虚拟币兑换实物</h3>
     <div class="desc">签到、发帖、活动赚"爆米花"→兑换游戏礼包、实物周边、内测资格、试玩账号。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://bkso.baidu.com/item/%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86/20589949" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+  </div>
+
+  <div class="card" data-platform="米游社">
+    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+    <span class="card-dim">UGC工具</span>
+    <h3>战绩卡片一键生成</h3>
+    <div class="desc">一键生成可分享的成就/深渊通关/探索进度图片卡。把"晒战绩"从截图+P图简化为一个按钮操作。</div>
+    <div class="card-date">2026年 · <a href="https://bbs.mihoyo.com/ys/article/1909903" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+  </div>
+
+  <div class="card" data-platform="米游社">
+    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+    <span class="card-dim">激励体系</span>
+    <h3>米游币日常任务循环</h3>
+    <div class="desc">每天完成读帖、点赞、分享、签到赚币→兑换游戏物品或周边。月上限约7000币。形成强习惯循环。</div>
+    <div class="card-date">2026年 · <a href="https://bbs.mihoyo.com/ys/article/1909903" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="NGA">
@@ -256,15 +215,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">激励体系</span>
     <h3>双轨信用体系（积分+威望）</h3>
     <div class="desc">"积分"衡量活跃度，"威望"衡量内容质量。两者独立追踪，威望达不同等级解锁不同特权。负威望触发禁言。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="card-date">2026年 · <a href="https://bkso.baidu.com/item/NGA/11411" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="NGA">
     <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">内容形态</span>
-    <h3>帖子版本标记+定期"复活"</h3>
-    <div class="desc">帖子自动标注适用游戏版本。过期攻略归档，高价值旧帖定期复活让社区投票是否仍适用。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <h3>AI辅助审核（误报率0.3%）</h3>
+    <div class="desc">语义AI引擎识别违规内容，三级审核流程，误报率仅0.3%。2026年上线HarmonyOS客户端。</div>
+    <div class="card-date">2026年 · <a href="https://bkso.baidu.com/item/NGA/11411" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="小红书">
@@ -272,83 +231,43 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span class="card-dim">社交功能</span>
     <h3>共享收藏夹：10人协作策展</h3>
     <div class="desc">创建协作收藏夹，邀请最多10个朋友共同收藏内容。解决"集体决策"痛点，工具驱动社交。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：媒体分析</div>
-  </div>
-
-  <div class="card" data-platform="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
-    <span class="card-dim">互动机制</span>
-    <h3>语音现场：即时语音聊天室</h3>
-    <div class="desc">内测音频聊天室，用户可发起或加入主题语音讨论，支持匿名。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：媒体报道</div>
+    <div class="card-date">2026年 · <a href="https://www.36kr.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="小红书">
     <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">内容形态</span>
-    <h3>游戏内容生活化（1.1亿月活游戏用户）</h3>
-    <div class="desc">游戏内容不是硬核攻略，而是生活化分享——游戏穿搭、角色周边、Cosplay、二创。85%Z世代，70%女性。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：官方数据+媒体</div>
+    <h3>游戏月活1.1亿：生活化游戏内容生态</h3>
+    <div class="desc">游戏内容覆盖穿搭、周边、Cosplay、二创。85%Z世代，70%女性。KPL/VCT官方社区入驻。</div>
+    <div class="card-date">2026年 · <a href="https://www.36kr.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="即刻">
     <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">互动机制</span>
     <h3>48小时限时日记</h3>
-    <div class="desc">日记帖对他人可见48小时后自动隐藏。发布日记点亮头像光圈。留存率63%远超行业均值。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：媒体分析</div>
-  </div>
-
-  <div class="card" data-platform="即刻">
-    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
-    <span class="card-dim">社交功能</span>
-    <h3>"松圈主义"弱关系设计</h3>
-    <div class="desc">定位在微信和陌生人社交之间。可自由切换深度参与和随意浏览。去掉私信减少骚扰。</div>
-    <div class="card-date">收录：2026.05.20</div>
-  </div>
-
-  <div class="card" data-platform="即刻">
-    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
-    <span class="card-dim">运营活动</span>
-    <h3>"面即"线下活动+打卡弹幕工具</h3>
-    <div class="desc">组织线下聚会，用打卡工具生成多人互动弹幕图。线下社交行为沉淀到线上。</div>
-    <div class="card-date">收录：2026.05.20</div>
-  </div>
-
-  <div class="card" data-platform="Discord">
-    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">社交功能</span>
-    <h3>Forum Channel：结构化讨论频道</h3>
-    <div class="desc">论坛型频道支持主题帖+标签+搜索。适合FAQ、攻略、反馈收集。不活跃帖自动归档。</div>
-    <div class="card-date">收录：2026.05.20</div>
+    <div class="desc">日记帖对他人可见48小时后自动隐藏（仅自己可看）。发布点亮头像光圈。留存率63%远超行业均值。</div>
+    <div class="card-date">2026年 · <a href="https://www.36kr.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
   <div class="card" data-platform="Discord">
     <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">互动机制</span>
-    <h3>服务器内购物/送礼（2025.12上线）</h3>
-    <div class="desc">用户在游戏社区内直接购买/赠送游戏物品，无需离开社区。</div>
-    <div class="card-date">收录：2026.05.20 · 来源：官方公告</div>
+    <h3>服务器内购物/送礼</h3>
+    <div class="desc">用户在游戏社区内直接购买/赠送游戏物品（如Marvel Rivals皮肤），无需离开社区。2025年12月上线。</div>
+    <div class="card-date">2026年1月 · <a href="https://www.newsbreak.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+  </div>
+
+  <div class="card" data-platform="Discord">
+    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+    <span class="card-dim">激励体系</span>
+    <h3>付费服务器：分层订阅制社区</h3>
+    <div class="desc">服务器主可设置付费订阅门槛，划分免费/付费频道，创作者直接通过社区变现。2026年1月上线。</div>
+    <div class="card-date">2026年1月 · <a href="https://www.newsbreak.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
   </div>
 
 </div>
-</div>
-
-<!-- ===== 板块2：社区热点（待建设） ===== -->
-<div class="tab-content" id="tab-trends">
-  <div class="empty">
-    <p>🚧 社区热点板块建设中</p>
-    <p style="margin-top:8px;font-size:12px;">将收录各社区讨论度高的话题、玩家关注的内容趋势</p>
-  </div>
-</div>
-
 <script>
-function switchTab(tab){
-  document.querySelectorAll('.tab-nav .tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('tab-'+tab).classList.add('active');
-}
 function filterPlatform(platform){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
