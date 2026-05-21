@@ -5,275 +5,219 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>社区玩法监测 — 微信游戏社区</title>
 <style>
-:root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#00BFA5;--accent2:#00E5C3;--text:#e8e8e8;--text2:#aaa;--text3:#666;--border:#2a2a2a;--yellow:#FECA57;--blue:#54A0FF;--orange:#FF9F43;}
+:root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#00BFA5;--accent2:#00E5C3;--text:#e8e8e8;--text2:#aaa;--text3:#666;--border:#2a2a2a;--yellow:#FECA57;--orange:#FF9F43;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;}
-
-/* Header */
-.header{padding:40px 24px 20px;max-width:1200px;margin:0 auto;}
+.header{padding:40px 24px 12px;max-width:1200px;margin:0 auto;}
 .header h1{font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
 .header p{font-size:14px;color:var(--text2);max-width:600px;}
-.header .meta-row{display:flex;gap:16px;margin-top:10px;font-size:12px;color:var(--text3);}
+.header .meta{font-size:12px;color:var(--text3);margin-top:8px;}
 
-/* Tab nav */
-.tab-nav{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;}
-.tab-nav .tab{padding:10px 20px;font-size:14px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
-.tab-nav .tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500;}
-.tab-nav .tab:hover{color:var(--text2);}
+/* Featured */
+.featured{max-width:1200px;margin:0 auto;padding:16px 24px 20px;}
+.featured-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.featured-title::before{content:'';width:3px;height:16px;background:var(--accent);border-radius:2px;}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;}
+.fc{background:linear-gradient(135deg,#0d1f1a,#0f1a2e);border:1px solid rgba(0,191,165,0.25);border-radius:12px;padding:16px;cursor:pointer;transition:transform 0.2s,border-color 0.2s;}
+.fc:hover{transform:translateY(-2px);border-color:var(--accent);}
+.fc .src{font-size:11px;color:var(--accent);margin-bottom:6px;}
+.fc .ttl{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.fc .dsc{font-size:12px;color:var(--text2);line-height:1.5;}
+.fc .mt{display:flex;gap:10px;margin-top:8px;font-size:11px;color:var(--text3);}
+.fc .mt a{color:var(--accent);text-decoration:none;}
 
-/* Filter row */
-.filter-row{max-width:1200px;margin:0 auto 16px;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.filter-row .label{font-size:12px;color:var(--text3);margin-right:4px;}
-.filter-btn{padding:5px 12px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;transition:all 0.2s;}
-.filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#000;font-weight:500;}
-
-/* Featured section */
-.featured{max-width:1200px;margin:0 auto 24px;padding:0 24px;}
-.featured-title{font-size:14px;color:var(--text2);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.featured-title::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px;}
-.featured-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;}
-.featured-card{background:linear-gradient(135deg,#1a2a1a,#1a1a2e);border:1px solid rgba(0,191,165,0.2);border-radius:12px;padding:16px;cursor:pointer;transition:transform 0.2s;}
-.featured-card:hover{transform:translateY(-2px);}
-.featured-card .fc-source{font-size:11px;color:var(--accent);margin-bottom:6px;}
-.featured-card .fc-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;}
-.featured-card .fc-desc{font-size:12px;color:var(--text2);line-height:1.5;}
-.featured-card .fc-meta{display:flex;gap:10px;margin-top:8px;font-size:11px;color:var(--text3);}
+/* Filters */
+.filters{max-width:1200px;margin:0 auto 16px;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filters .lb{font-size:12px;color:var(--text3);margin-right:4px;}
+.fb{padding:5px 12px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;transition:all 0.2s;}
+.fb:hover,.fb.on{background:var(--accent);border-color:var(--accent);color:#000;font-weight:500;}
 
 /* Grid */
 .grid{max-width:1200px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
-
-/* Card */
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;transition:transform 0.2s,border-color 0.2s;position:relative;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;transition:transform 0.2s,border-color 0.2s;}
 .card:hover{transform:translateY(-2px);border-color:rgba(0,191,165,0.3);}
 .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.card-source{display:flex;align-items:center;gap:8px;}
-.card-source .logo{width:22px;height:22px;border-radius:5px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:11px;}
-.card-source .name{font-size:12px;color:var(--text3);}
-.card-tags{display:flex;gap:6px;}
-.card-tag{font-size:10px;padding:2px 6px;border-radius:8px;}
-.tag-official{background:rgba(0,191,165,0.12);color:var(--accent2);}
-.tag-media{background:rgba(255,159,67,0.12);color:var(--orange);}
-.tag-hot{background:rgba(254,202,87,0.12);color:var(--yellow);}
+.card-src{display:flex;align-items:center;gap:8px;}
+.card-src .logo{width:22px;height:22px;border-radius:5px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:11px;}
+.card-src .nm{font-size:12px;color:var(--text3);}
+.tags{display:flex;gap:6px;}
+.tag{font-size:10px;padding:2px 6px;border-radius:8px;}
+.t-off{background:rgba(0,191,165,0.12);color:var(--accent2);}
+.t-med{background:rgba(255,159,67,0.12);color:var(--orange);}
+.t-hot{background:rgba(254,202,87,0.12);color:var(--yellow);}
 .card-dim{font-size:11px;color:var(--accent);background:rgba(0,191,165,0.08);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:6px;}
 .card h3{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--text);}
 .card .desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px;}
-.card .card-date{font-size:11px;color:var(--text3);}
-
-/* Tab content */
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-
-/* Empty state */
-.empty{max-width:1200px;margin:0 auto;padding:40px 24px;text-align:center;color:var(--text3);font-size:14px;}
-
-@media(max-width:768px){.grid{grid-template-columns:1fr;}.featured-grid{grid-template-columns:1fr;}.header h1{font-size:22px;}}
+.card .foot{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:8px;}
+.card .foot a{color:var(--accent);text-decoration:none;}
+@media(max-width:768px){.grid{grid-template-columns:1fr;}.fg{grid-template-columns:1fr;}.header h1{font-size:22px;}}
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>社区玩法监测</h1>
-  <p>追踪游戏社区及泛社区产品的功能迭代，快速了解各平台在做什么</p>
-  <div class="meta-row">
-    <span>最近更新：2026年5月21日</span>
-    <span>覆盖 7 个平台</span>
-  </div>
+  <p>追踪游戏社区及泛社区平台的功能迭代动态</p>
+  <div class="meta">最近更新：2026年5月21日 · 覆盖 7 个平台</div>
 </div>
 
-<!-- 本周关注 - 紧跟header -->
 <div class="featured">
   <div class="featured-title">本周关注</div>
-  <div class="featured-grid">
-    <div class="featured-card" onclick="window.open('https://nw.eastday.com/zq/zh/20260213/40be2fa0e6b97e7d8cbc935d3dde6b65.html')">
-      <div class="fc-source">TapTap · 官方发布</div>
-      <div class="fc-title">TapTap制造：自然语言生成可玩游戏Demo</div>
-      <div class="fc-desc">用户描述游戏创意→AI约5分钟生成可玩Demo→一键发布到平台。无需编程美术能力。</div>
-      <div class="fc-meta"><span>2026年2月</span><span style="color:var(--accent);">查看来源 →</span></div>
+  <div class="fg">
+    <div class="fc" onclick="window.open('https://xueqiu.com/3452259888/374737417')">
+      <div class="src">TapTap · 官方发布+高盛研报</div>
+      <div class="ttl">TapTap Create：AI自然语言生成可玩游戏原型</div>
+      <div class="dsc">用户通过自然语言描述游戏创意→AI生成可玩原型→整合TDS开发者服务→一键发布到平台。降低游戏创作门槛至零。</div>
+      <div class="mt"><span>2026年1月</span><a href="https://xueqiu.com/3452259888/374737417" target="_blank">查看来源 →</a></div>
     </div>
-    <div class="featured-card" onclick="window.open('https://www.36dianping.com/info/116127.html')">
-      <div class="fc-source">TapTap · 媒体报道</div>
-      <div class="fc-title">游戏内嵌社区：40%用户在游戏内使用社区功能</div>
-      <div class="fc-desc">通过TapSDK嵌入，玩家不离开游戏即可看好友动态、发帖互动。Flash Party实测数据。</div>
-      <div class="fc-meta"><span>2026年</span><span style="color:var(--accent);">查看来源 →</span></div>
+    <div class="fc" onclick="window.open('https://x.com/AYi_AInotes/status/2057371332359201103')">
+      <div class="src">行业动态 · X/Twitter KOL</div>
+      <div class="ttl">Grok实现4步AI游戏资产生成，开发门槛被踹飞</div>
+      <div class="dsc">提示词出角色图→图片变动画→视频自动拼成spritesheet→直接丢进Unity跑起来。全程几分钟，将迭代周期从天压缩至秒。</div>
+      <div class="mt"><span>2026年5月21日</span><a href="https://x.com/AYi_AInotes/status/2057371332359201103" target="_blank">查看来源 →</a></div>
     </div>
-    <div class="featured-card" onclick="window.open('https://siit.co/guestposts/mobile-gaming-social-features-that-will-define-2026/')">
-      <div class="fc-source">行业趋势 · 外媒报告</div>
-      <div class="fc-title">AI社交匹配：互动成功率提升47%</div>
-      <div class="fc-desc">基于玩法偏好和行为数据的算法推荐队友/搭子，多平台验证互动成功率显著提升。</div>
-      <div class="fc-meta"><span>2026年</span><span style="color:var(--accent);">查看来源 →</span></div>
+    <div class="fc" onclick="window.open('https://discord.com/developer-newsletter/september-2025')">
+      <div class="src">Discord · 官方公告</div>
+      <div class="ttl">Discord推出游戏服务器托管+服务器内购物/送礼</div>
+      <div class="dsc">Server Boost可转化为游戏服务器托管；玩家可在社区内直接购买/赠送游戏物品（Marvel Rivals已接入）。</div>
+      <div class="mt"><span>2026年初</span><a href="https://danktoots.com/blog/post/discord-game-servers-feature" target="_blank">查看来源 →</a></div>
     </div>
   </div>
 </div>
 
-<!-- 平台筛选 -->
-<div class="filter-row">
-  <span class="label">平台：</span>
-  <button class="filter-btn active" onclick="filterPlatform('all')">全部</button>
-  <button class="filter-btn" onclick="filterPlatform('TapTap')">TapTap</button>
-  <button class="filter-btn" onclick="filterPlatform('小黑盒')">小黑盒</button>
-  <button class="filter-btn" onclick="filterPlatform('好游快爆')">好游快爆</button>
-  <button class="filter-btn" onclick="filterPlatform('米游社')">米游社</button>
-  <button class="filter-btn" onclick="filterPlatform('NGA')">NGA</button>
-  <button class="filter-btn" onclick="filterPlatform('小红书')">小红书</button>
-  <button class="filter-btn" onclick="filterPlatform('即刻')">即刻</button>
-  <button class="filter-btn" onclick="filterPlatform('Discord')">Discord</button>
+<div class="filters">
+  <span class="lb">平台：</span>
+  <button class="fb on" onclick="fil('all')">全部</button>
+  <button class="fb" onclick="fil('TapTap')">TapTap</button>
+  <button class="fb" onclick="fil('小黑盒')">小黑盒</button>
+  <button class="fb" onclick="fil('好游快爆')">好游快爆</button>
+  <button class="fb" onclick="fil('米游社')">米游社</button>
+  <button class="fb" onclick="fil('Discord')">Discord</button>
+  <button class="fb" onclick="fil('行业')">行业趋势</button>
 </div>
 
-<!-- 全部卡片 -->
-<div class="grid" id="card-grid">
+<div class="grid" id="grid">
 
-  <div class="card" data-platform="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+  <div class="card" data-p="TapTap">
+    <div class="card-top"><div class="card-src"><div class="logo">T</div><span class="nm">TapTap</span></div><div class="tags"><span class="tag t-off">官方</span><span class="tag t-hot">🔥</span></div></div>
+    <span class="card-dim">UGC工具</span>
+    <h3>TapTap Create：AI游戏创作工具上线</h3>
+    <div class="desc">自然语言描述→AI生成可玩原型→整合TDS服务（登录/云存档）→一键发布。自研引擎支持3D渲染、物理、多人联机。</div>
+    <div class="foot"><span>2026年1月</span><a href="https://xueqiu.com/3452259888/374737417" target="_blank">来源：雪球/高盛研报</a></div>
+  </div>
+
+  <div class="card" data-p="TapTap">
+    <div class="card-top"><div class="card-src"><div class="logo">T</div><span class="nm">TapTap</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">社交功能</span>
-    <h3>"搭子"轻社交系统</h3>
-    <div class="desc">用户找游戏搭子，细分为"剧情讨论搭子""抽卡搭子""日常任务搭子"等。关系定位介于队友和朋友之间，强调低压力、有边界的连接。</div>
-    <div class="card-date">2026年 · <a href="https://baijiahao.baidu.com/s?id=1841403662228401660" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>"一起玩"社区板块：从匹配转向多元组局</h3>
+    <div class="desc">新增组队开黑功能，玩家可发布活动帖召集同伴。整合弹幕互动和实时评测，游戏页面直接查看动态攻略和热门讨论。</div>
+    <div class="foot"><span>2026年</span><a href="https://www.ququyou.com/soft/13825.html" target="_blank">来源：趣趣手游网评测</a></div>
   </div>
 
-  <div class="card" data-platform="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
+  <div class="card" data-p="TapTap">
+    <div class="card-top"><div class="card-src"><div class="logo">T</div><span class="nm">TapTap</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">互动机制</span>
-    <h3>游戏内嵌社区动态（TapSDK）</h3>
-    <div class="desc">通过SDK，玩家不离开游戏就能看到好友帖子和成就。Flash Party约40%玩家使用内嵌社区功能。</div>
-    <div class="card-date">2026年 · <a href="https://www.36dianping.com/info/116127.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>云游戏社交：围观好友+弹幕互动+投票影响剧情</h3>
+    <div class="desc">云游戏增加社交功能：围观好友游戏过程并发弹幕；主播模式下观众可投票影响游戏分支剧情。</div>
+    <div class="foot"><span>2026年</span><a href="https://www.ququyou.com/soft/13825.html" target="_blank">来源：趣趣手游网评测</a></div>
   </div>
 
-  <div class="card" data-platform="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
+  <div class="card" data-p="小黑盒">
+    <div class="card-top"><div class="card-src"><div class="logo">盒</div><span class="nm">小黑盒</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">UGC工具</span>
-    <h3>TapTap制造：AI游戏创作工具</h3>
-    <div class="desc">2026年2月上线。用户用自然语言描述游戏→AI约5分钟生成可玩Demo。无需编程和美术能力，一键发布到平台。</div>
-    <div class="card-date">2026年2月 · <a href="https://nw.eastday.com/zq/zh/20260213/40be2fa0e6b97e7d8cbc935d3dde6b65.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>一键生成成就海报+短视频发布</h3>
+    <div class="desc">自动从Steam数据生成可分享视觉海报。2026年新增短视频发布功能和"探索模式"打破信息茧房。版本v1.3.387。</div>
+    <div class="foot"><span>2026年5月</span><a href="https://www.wandoujia.com/apps/7627178" target="_blank">来源：豌豆荚/官方更新</a></div>
   </div>
 
-  <div class="card" data-platform="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
+  <div class="card" data-p="小黑盒">
+    <div class="card-top"><div class="card-src"><div class="logo">盒</div><span class="nm">小黑盒</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">内容形态</span>
-    <h3>攻略模块：0.5%帖量吸引50%DAU</h3>
-    <div class="desc">独立攻略板块虽帖子数量极少，但吸引平台一半日活用户。说明结构化实用内容需求远强于社交水贴。</div>
-    <div class="card-date">2026年 · <a href="https://www.36dianping.com/info/116127.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>战绩查询扩展：覆盖无畏契约/原神/永劫无间等</h3>
+    <div class="desc">新增《无畏契约》每日商店查询、《原神》抽卡分析、《永劫无间》《命运2》等游戏战绩追踪。一键同步多平台数据。</div>
+    <div class="foot"><span>2026年</span><a href="https://bkso.baidu.com/item/%E5%B0%8F%E9%BB%91%E7%9B%92/22427592" target="_blank">来源：百度百科</a></div>
   </div>
 
-  <div class="card" data-platform="小黑盒">
-    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">UGC工具</span>
-    <h3>一键成就海报生成</h3>
-    <div class="desc">自动从Steam数据生成可分享视觉海报（徽章、游戏时长、成就进度）。极低创作成本的"炫耀"工具。</div>
-    <div class="card-date">2026年 · <a href="https://baike.baidu.com/item/%E5%B0%8F%E9%BB%91%E7%9B%92/22427592" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
-  </div>
-
-  <div class="card" data-platform="小黑盒">
-    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">激励体系</span>
-    <h3>创作者三级认证 + "盒电"曝光加速</h3>
-    <div class="desc">Lv3/5/7三级认证逐级解锁权益。创作者赚取"盒电"可推广自己文章曝光量。</div>
-    <div class="card-date">2026年 · <a href="https://baike.baidu.com/item/%E5%B0%8F%E9%BB%91%E7%9B%92/22427592" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
-  </div>
-
-  <div class="card" data-platform="好游快爆">
-    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">互动机制</span>
-    <h3>开发者直连论坛</h3>
-    <div class="desc">玩家在专属论坛直接和游戏开发者沟通、反馈Bug、提建议。缩短反馈链路。</div>
-    <div class="card-date">2026年 · <a href="https://www.downxia.com/downinfo/440565.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
-  </div>
-
-  <div class="card" data-platform="好游快爆">
-    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+  <div class="card" data-p="好游快爆">
+    <div class="card-top"><div class="card-src"><div class="logo">爆</div><span class="nm">好游快爆</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">运营活动</span>
-    <h3>礼仪考试：游戏化社区治理</h3>
-    <div class="desc">用户通过社区行为规范测试才能解锁特定社交功能。"参与前教育"替代"违规后惩罚"。</div>
-    <div class="card-date">2026年 · <a href="https://www.downxia.com/downinfo/440565.html" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>社交DNA标签+礼仪考试解锁社交功能</h3>
+    <div class="desc">可定制个人社交DNA标签用于匹配；通过社区行为规范考试才能解锁特定社交功能。v1.5.8版本2026年5月更新。</div>
+    <div class="foot"><span>2026年5月</span><a href="https://www.downxia.com/downinfo/440565.html" target="_blank">来源：下载之家/版本更新</a></div>
   </div>
 
-  <div class="card" data-platform="好游快爆">
-    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+  <div class="card" data-p="好游快爆">
+    <div class="card-top"><div class="card-src"><div class="logo">爆</div><span class="nm">好游快爆</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">激励体系</span>
-    <h3>爆米花经济：虚拟币兑换实物</h3>
-    <div class="desc">签到、发帖、活动赚"爆米花"→兑换游戏礼包、实物周边、内测资格、试玩账号。</div>
-    <div class="card-date">2026年 · <a href="https://bkso.baidu.com/item/%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86/20589949" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>爆米花经济+年度游戏大赏投票</h3>
+    <div class="desc">签到/发帖/活动赚"爆米花"→兑换游戏礼包、实物周边、内测资格。2025年度游戏大赏（TGA联动）社区投票。</div>
+    <div class="foot"><span>2026年</span><a href="https://bkso.baidu.com/item/%E5%A5%BD%E6%B8%B8%E5%BF%AB%E7%88%86/20589949" target="_blank">来源：百度百科</a></div>
   </div>
 
-  <div class="card" data-platform="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+  <div class="card" data-p="米游社">
+    <div class="card-top"><div class="card-src"><div class="logo">米</div><span class="nm">米游社</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">UGC工具</span>
-    <h3>战绩卡片一键生成</h3>
-    <div class="desc">一键生成可分享的成就/深渊通关/探索进度图片卡。把"晒战绩"从截图+P图简化为一个按钮操作。</div>
-    <div class="card-date">2026年 · <a href="https://bbs.mihoyo.com/ys/article/1909903" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>战绩卡片+阵容模拟器+桌面Widget</h3>
+    <div class="desc">一键生成分享卡；阵容模拟器按场景筛选通关方案；桌面小组件实时显示体力/活动倒计时。支持绝区零/星铁/原神。</div>
+    <div class="foot"><span>2026年</span><a href="https://bbs.mihoyo.com/ys/article/1909903" target="_blank">来源：米游社官方</a></div>
   </div>
 
-  <div class="card" data-platform="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
+  <div class="card" data-p="米游社">
+    <div class="card-top"><div class="card-src"><div class="logo">米</div><span class="nm">米游社</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">激励体系</span>
-    <h3>米游币日常任务循环</h3>
-    <div class="desc">每天完成读帖、点赞、分享、签到赚币→兑换游戏物品或周边。月上限约7000币。形成强习惯循环。</div>
-    <div class="card-date">2026年 · <a href="https://bbs.mihoyo.com/ys/article/1909903" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>创作者分级：Lv5+解锁认证+推荐权重+现金结算</h3>
+    <div class="desc">创作者等级由浏览/点赞/评论计算。Lv5+解锁官方认证、算法推荐优先、粉丝增长工具。创作币10:1可提现。</div>
+    <div class="foot"><span>2026年</span><a href="https://bbs.mihoyo.com/dby/article/3636227" target="_blank">来源：米游社创作中心</a></div>
   </div>
 
-  <div class="card" data-platform="NGA">
-    <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">激励体系</span>
-    <h3>双轨信用体系（积分+威望）</h3>
-    <div class="desc">"积分"衡量活跃度，"威望"衡量内容质量。两者独立追踪，威望达不同等级解锁不同特权。负威望触发禁言。</div>
-    <div class="card-date">2026年 · <a href="https://bkso.baidu.com/item/NGA/11411" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+  <div class="card" data-p="Discord">
+    <div class="card-top"><div class="card-src"><div class="logo">D</div><span class="nm">Discord</span></div><div class="tags"><span class="tag t-off">官方</span><span class="tag t-hot">🔥</span></div></div>
+    <span class="card-dim">互动机制</span>
+    <h3>游戏服务器托管：Boost转化为专属服务器</h3>
+    <div class="desc">Server Boost可直接转化为游戏专属服务器，省去第三方托管费。统一语音+游玩体验。目前限定部分游戏。</div>
+    <div class="foot"><span>2026年</span><a href="https://danktoots.com/blog/post/discord-game-servers-feature" target="_blank">来源：DankToots</a></div>
   </div>
 
-  <div class="card" data-platform="NGA">
-    <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">内容形态</span>
-    <h3>AI辅助审核（误报率0.3%）</h3>
-    <div class="desc">语义AI引擎识别违规内容，三级审核流程，误报率仅0.3%。2026年上线HarmonyOS客户端。</div>
-    <div class="card-date">2026年 · <a href="https://bkso.baidu.com/item/NGA/11411" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
-  </div>
-
-  <div class="card" data-platform="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
+  <div class="card" data-p="Discord">
+    <div class="card-top"><div class="card-src"><div class="logo">D</div><span class="nm">Discord</span></div><div class="tags"><span class="tag t-off">官方</span></div></div>
     <span class="card-dim">社交功能</span>
-    <h3>共享收藏夹：10人协作策展</h3>
-    <div class="desc">创建协作收藏夹，邀请最多10个朋友共同收藏内容。解决"集体决策"痛点，工具驱动社交。</div>
-    <div class="card-date">2026年 · <a href="https://www.36kr.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>AI Co-Pilot：总结消息+实时游戏建议+优化直播</h3>
+    <div class="desc">AI助手可总结频道消息、高亮关键决策、提供实时游戏tips、优化直播设置。AR覆盖层显示K/D等数据。</div>
+    <div class="foot"><span>2026年</span><a href="https://www.techbloat.com/?p=904241" target="_blank">来源：TechBloat</a></div>
   </div>
 
-  <div class="card" data-platform="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
-    <span class="card-dim">内容形态</span>
-    <h3>游戏月活1.1亿：生活化游戏内容生态</h3>
-    <div class="desc">游戏内容覆盖穿搭、周边、Cosplay、二创。85%Z世代，70%女性。KPL/VCT官方社区入驻。</div>
-    <div class="card-date">2026年 · <a href="https://www.36kr.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+  <div class="card" data-p="行业">
+    <div class="card-top"><div class="card-src"><div class="logo">🔥</div><span class="nm">行业趋势</span></div><div class="tags"><span class="tag t-med">外媒</span><span class="tag t-hot">🔥</span></div></div>
+    <span class="card-dim">社交功能</span>
+    <h3>AI社交匹配：基于行为数据推荐队友，成功率+47%</h3>
+    <div class="desc">基于玩法偏好和游戏行为的算法推荐搭子/队友，多平台验证互动成功率提升约47%。</div>
+    <div class="foot"><span>2026年</span><a href="https://siit.co/guestposts/mobile-gaming-social-features-that-will-define-2026/" target="_blank">来源：SIIT报告</a></div>
   </div>
 
-  <div class="card" data-platform="即刻">
-    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span><span class="card-tag tag-hot">🔥</span></div></div>
+  <div class="card" data-p="行业">
+    <div class="card-top"><div class="card-src"><div class="logo">🔥</div><span class="nm">行业趋势</span></div><div class="tags"><span class="tag t-med">外媒</span></div></div>
     <span class="card-dim">互动机制</span>
-    <h3>48小时限时日记</h3>
-    <div class="desc">日记帖对他人可见48小时后自动隐藏（仅自己可看）。发布点亮头像光圈。留存率63%远超行业均值。</div>
-    <div class="card-date">2026年 · <a href="https://www.36kr.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+    <h3>谷歌Ask Play：对话式AI筛选应用和游戏</h3>
+    <div class="desc">Google推出Ask Play，用户可通过连续对话让AI推荐应用和游戏，取代传统分类浏览。</div>
+    <div class="foot"><span>2026年5月19日</span><a href="https://www.ithome.com/0/952/539.htm" target="_blank">来源：IT之家</a></div>
   </div>
 
-  <div class="card" data-platform="Discord">
-    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
-    <span class="card-dim">互动机制</span>
-    <h3>服务器内购物/送礼</h3>
-    <div class="desc">用户在游戏社区内直接购买/赠送游戏物品（如Marvel Rivals皮肤），无需离开社区。2025年12月上线。</div>
-    <div class="card-date">2026年1月 · <a href="https://www.newsbreak.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
-  </div>
-
-  <div class="card" data-platform="Discord">
-    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
-    <span class="card-dim">激励体系</span>
-    <h3>付费服务器：分层订阅制社区</h3>
-    <div class="desc">服务器主可设置付费订阅门槛，划分免费/付费频道，创作者直接通过社区变现。2026年1月上线。</div>
-    <div class="card-date">2026年1月 · <a href="https://www.newsbreak.com" target="_blank" style="color:var(--accent);text-decoration:none;">来源</a></div>
+  <div class="card" data-p="行业">
+    <div class="card-top"><div class="card-src"><div class="logo">🔥</div><span class="nm">行业趋势</span></div><div class="tags"><span class="tag t-med">外媒</span></div></div>
+    <span class="card-dim">UGC工具</span>
+    <h3>Take-Two CEO：AI能加速开发，但无法独立创造爆款</h3>
+    <div class="desc">GTA母公司CEO认为AI是强力工具但不能替代创意团队。对游戏UGC工具定位的权威判断。</div>
+    <div class="foot"><span>2026年5月20日</span><a href="https://www.ithome.com/0/952/926.htm" target="_blank">来源：IT之家</a></div>
   </div>
 
 </div>
+
 <script>
-function filterPlatform(platform){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelectorAll('#card-grid .card').forEach(c=>{
-    if(platform==='all'||c.dataset.platform===platform){c.style.display='block';}
-    else{c.style.display='none';}
+function fil(p){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  event.target.classList.add('on');
+  document.querySelectorAll('#grid .card').forEach(c=>{
+    c.style.display=(p==='all'||c.dataset.p===p)?'block':'none';
   });
 }
 </script>
