@@ -79,6 +79,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
     <span>收录 24 条</span>
     <span>覆盖 7 个平台</span>
   </div>
+  <div style="margin-top:14px;padding:10px 14px;background:var(--card);border-radius:8px;border:1px solid var(--border);font-size:12px;color:var(--text2);line-height:1.7;">
+    <div style="margin-bottom:4px;color:var(--text);font-weight:500;">这个页面能告诉你：</div>
+    各游戏社区/泛社区平台近期的功能迭代动态。按平台筛选查看，按关联程度排序（游戏社区优先）。<br>
+    <span style="color:var(--accent2);">官方</span> = 来自平台更新日志/官方文档，信息准确；
+    <span style="color:var(--orange);">媒体</span> = 来自外部媒体报道，供参考；
+    <span style="color:var(--yellow);">🔥</span> = 大平台新功能或高讨论度，值得重点关注。
+  </div>
 </div>
 
 <!-- 板块切换 -->
@@ -95,9 +102,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
   <span class="label">平台：</span>
   <button class="filter-btn active" onclick="filterPlatform('all')">全部</button>
   <button class="filter-btn" onclick="filterPlatform('TapTap')">TapTap</button>
-  <button class="filter-btn" onclick="filterPlatform('米游社')">米游社</button>
   <button class="filter-btn" onclick="filterPlatform('小黑盒')">小黑盒</button>
   <button class="filter-btn" onclick="filterPlatform('好游快爆')">好游快爆</button>
+  <button class="filter-btn" onclick="filterPlatform('米游社')">米游社</button>
   <button class="filter-btn" onclick="filterPlatform('NGA')">NGA</button>
   <button class="filter-btn" onclick="filterPlatform('小红书')">小红书</button>
   <button class="filter-btn" onclick="filterPlatform('即刻')">即刻</button>
@@ -133,7 +140,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 <div class="grid" id="card-grid">
 
   <div class="card" data-platform="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
+    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">社交功能</span>
     <h3>"搭子"轻社交系统</h3>
     <div class="desc">用户找游戏搭子，细分为"剧情讨论搭子""抽卡搭子""日常任务搭子"等。关系定位介于队友和朋友之间，强调低压力、有边界的连接。</div>
@@ -277,7 +284,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
   </div>
 
   <div class="card" data-platform="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span><span class="card-tag tag-hot">🔥</span></div></div>
+    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">内容形态</span>
     <h3>游戏内容生活化（1.1亿月活游戏用户）</h3>
     <div class="desc">游戏内容不是硬核攻略，而是生活化分享——游戏穿搭、角色周边、Cosplay、二创。85%Z世代，70%女性。</div>
