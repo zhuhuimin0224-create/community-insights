@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>社区玩法监测 — 微信游戏社区</title>
 <style>
-:root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#00BFA5;--accent2:#00E5C3;--text:#e8e8e8;--text2:#aaa;--text3:#666;--border:#2a2a2a;--red:#FF4757;--yellow:#FECA57;--blue:#54A0FF;}
+:root{--bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--accent:#00BFA5;--accent2:#00E5C3;--text:#e8e8e8;--text2:#aaa;--text3:#666;--border:#2a2a2a;--yellow:#FECA57;--blue:#54A0FF;--orange:#FF9F43;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;}
 
@@ -13,274 +13,340 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue"
 .header{padding:40px 24px 20px;max-width:1200px;margin:0 auto;}
 .header h1{font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
 .header p{font-size:14px;color:var(--text2);max-width:600px;}
-.header .update-time{font-size:12px;color:var(--text3);margin-top:8px;}
+.header .meta-row{display:flex;gap:16px;margin-top:10px;font-size:12px;color:var(--text3);}
 
-/* Filter tabs */
-.filters{padding:0 24px;max-width:1200px;margin:0 auto 20px;display:flex;gap:8px;flex-wrap:wrap;}
-.filter-btn{padding:6px 14px;border-radius:16px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;transition:all 0.2s;}
+/* Tab nav */
+.tab-nav{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.tab-nav .tab{padding:10px 20px;font-size:14px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
+.tab-nav .tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500;}
+.tab-nav .tab:hover{color:var(--text2);}
+
+/* Filter row */
+.filter-row{max-width:1200px;margin:0 auto 16px;padding:0 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filter-row .label{font-size:12px;color:var(--text3);margin-right:4px;}
+.filter-btn{padding:5px 12px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;transition:all 0.2s;}
 .filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#000;font-weight:500;}
 
+/* Featured section */
+.featured{max-width:1200px;margin:0 auto 24px;padding:0 24px;}
+.featured-title{font-size:14px;color:var(--text2);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.featured-title::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px;}
+.featured-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;}
+.featured-card{background:linear-gradient(135deg,#1a2a1a,#1a1a2e);border:1px solid rgba(0,191,165,0.2);border-radius:12px;padding:16px;cursor:pointer;transition:transform 0.2s;}
+.featured-card:hover{transform:translateY(-2px);}
+.featured-card .fc-source{font-size:11px;color:var(--accent);margin-bottom:6px;}
+.featured-card .fc-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.featured-card .fc-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+.featured-card .fc-meta{display:flex;gap:10px;margin-top:8px;font-size:11px;color:var(--text3);}
+
 /* Grid */
-.grid{max-width:1200px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
+.grid{max-width:1200px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
 
 /* Card */
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:transform 0.2s,border-color 0.2s;position:relative;overflow:hidden;}
-.card:hover{transform:translateY(-2px);border-color:var(--accent);}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;transition:transform 0.2s,border-color 0.2s;position:relative;}
+.card:hover{transform:translateY(-2px);border-color:rgba(0,191,165,0.3);}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .card-source{display:flex;align-items:center;gap:8px;}
-.card-source .logo{width:24px;height:24px;border-radius:6px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:12px;}
-.card-source .name{font-size:13px;color:var(--text2);}
-.card-priority{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;}
-.card-priority.p1{background:rgba(0,191,165,0.15);color:var(--accent2);}
-.card-priority.p2{background:rgba(254,202,87,0.15);color:var(--yellow);}
-.card-priority.p3{background:rgba(84,160,255,0.15);color:var(--blue);}
-.card-dim{font-size:11px;color:var(--accent);background:rgba(0,191,165,0.1);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:8px;}
-.card h3{font-size:16px;font-weight:600;margin-bottom:6px;color:var(--text);}
-.card .desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;}
-.card .insight{font-size:12px;color:var(--accent2);padding:8px 10px;background:rgba(0,191,165,0.06);border-radius:6px;border-left:2px solid var(--accent);}
-.card .insight::before{content:'💡 ';font-size:11px;}
+.card-source .logo{width:22px;height:22px;border-radius:5px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:11px;}
+.card-source .name{font-size:12px;color:var(--text3);}
+.card-tags{display:flex;gap:6px;}
+.card-tag{font-size:10px;padding:2px 6px;border-radius:8px;}
+.tag-official{background:rgba(0,191,165,0.12);color:var(--accent2);}
+.tag-media{background:rgba(255,159,67,0.12);color:var(--orange);}
+.tag-hot{background:rgba(254,202,87,0.12);color:var(--yellow);}
+.card-dim{font-size:11px;color:var(--accent);background:rgba(0,191,165,0.08);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:6px;}
+.card h3{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--text);}
+.card .desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:8px;}
+.card .card-date{font-size:11px;color:var(--text3);}
 
-/* Responsive */
-@media(max-width:768px){.grid{grid-template-columns:1fr;}.header h1{font-size:22px;}}
+/* Tab content */
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* Empty state */
+.empty{max-width:1200px;margin:0 auto;padding:40px 24px;text-align:center;color:var(--text3);font-size:14px;}
+
+@media(max-width:768px){.grid{grid-template-columns:1fr;}.featured-grid{grid-template-columns:1fr;}.header h1{font-size:22px;}}
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>社区玩法监测</h1>
-  <p>追踪游戏社区及泛社区产品的功能创新，为微信游戏社区体验优化提供参考</p>
-  <div class="update-time">最近更新：2026年5月20日 · 共收录 24 条洞察</div>
+  <p>追踪游戏社区及泛社区产品的功能迭代，快速了解各平台在做什么</p>
+  <div class="meta-row">
+    <span>最近更新：2026年5月21日</span>
+    <span>收录 24 条</span>
+    <span>覆盖 7 个平台</span>
+  </div>
 </div>
 
-<div class="filters">
-  <button class="filter-btn active" onclick="filterCards('all')">全部</button>
-  <button class="filter-btn" onclick="filterCards('互动机制')">互动机制</button>
-  <button class="filter-btn" onclick="filterCards('内容形态')">内容形态</button>
-  <button class="filter-btn" onclick="filterCards('社交功能')">社交功能</button>
-  <button class="filter-btn" onclick="filterCards('激励体系')">激励体系</button>
-  <button class="filter-btn" onclick="filterCards('UGC工具')">UGC工具</button>
-  <button class="filter-btn" onclick="filterCards('运营活动')">运营活动</button>
+<!-- 板块切换 -->
+<div class="tab-nav">
+  <div class="tab active" onclick="switchTab('features')">功能迭代</div>
+  <div class="tab" onclick="switchTab('trends')">社区热点</div>
 </div>
 
+<!-- ===== 板块1：功能迭代 ===== -->
+<div class="tab-content active" id="tab-features">
+
+<!-- 平台筛选 -->
+<div class="filter-row">
+  <span class="label">平台：</span>
+  <button class="filter-btn active" onclick="filterPlatform('all')">全部</button>
+  <button class="filter-btn" onclick="filterPlatform('TapTap')">TapTap</button>
+  <button class="filter-btn" onclick="filterPlatform('米游社')">米游社</button>
+  <button class="filter-btn" onclick="filterPlatform('小黑盒')">小黑盒</button>
+  <button class="filter-btn" onclick="filterPlatform('好游快爆')">好游快爆</button>
+  <button class="filter-btn" onclick="filterPlatform('NGA')">NGA</button>
+  <button class="filter-btn" onclick="filterPlatform('小红书')">小红书</button>
+  <button class="filter-btn" onclick="filterPlatform('即刻')">即刻</button>
+  <button class="filter-btn" onclick="filterPlatform('Discord')">Discord</button>
+</div>
+
+<!-- 本周重点 -->
+<div class="featured">
+  <div class="featured-title">本周关注</div>
+  <div class="featured-grid">
+    <div class="featured-card">
+      <div class="fc-source">TapTap · 官方发布</div>
+      <div class="fc-title">TapTap制造：AI生成可玩游戏Demo</div>
+      <div class="fc-desc">用户用自然语言描述游戏，约5分钟生成可玩Demo，一键发布到平台。2026年2月上线。</div>
+      <div class="fc-meta"><span>🔥 高讨论度</span><span>2026.02</span></div>
+    </div>
+    <div class="featured-card">
+      <div class="fc-source">即刻 · 媒体报道</div>
+      <div class="fc-title">48小时限时日记：发完48h后自动隐藏</div>
+      <div class="fc-desc">日记帖对他人可见48小时后自动仅自己可见。降低发帖心理压力，留存率63%远超行业均值。</div>
+      <div class="fc-meta"><span>🔥 高讨论度</span><span>2025</span></div>
+    </div>
+    <div class="featured-card">
+      <div class="fc-source">小红书 · 媒体报道</div>
+      <div class="fc-title">共享收藏夹：最多10人协作收藏</div>
+      <div class="fc-desc">邀请好友共同收藏内容，解决"集体决策"场景。工具驱动社交关系建立。</div>
+      <div class="fc-meta"><span>2025-2026</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 全部卡片 -->
 <div class="grid" id="card-grid">
 
-  <!-- TapTap -->
-  <div class="card" data-dim="社交功能" data-source="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="TapTap">
+    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">社交功能</span>
     <h3>"搭子"轻社交系统</h3>
     <div class="desc">用户找游戏搭子，细分为"剧情讨论搭子""抽卡搭子""日常任务搭子"等。关系定位介于队友和朋友之间，强调低压力、有边界的连接。</div>
-    <div class="insight">微信游戏社区有天然的关系链优势，可以基于"最近一起玩"的数据自动推荐搭子，比TapTap的手动找人效率更高。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="互动机制" data-source="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="TapTap">
+    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">互动机制</span>
-    <h3>游戏内嵌社区动态</h3>
-    <div class="desc">通过TapSDK，玩家不离开游戏就能看到好友帖子和成就。Flash Party约40%玩家使用游戏内嵌社区功能。</div>
-    <div class="insight">微信小游戏天然支持内嵌能力。如果在小游戏结束页面嵌入"好友也在玩"的动态流，可以直接在游戏场景内完成社交闭环。</div>
+    <h3>游戏内嵌社区动态（TapSDK）</h3>
+    <div class="desc">通过SDK，玩家不离开游戏就能看到好友帖子和成就。Flash Party约40%玩家使用内嵌社区功能。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="UGC工具" data-source="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><span class="card-priority p3">🔵 纯灵感</span></div>
+  <div class="card" data-platform="TapTap">
+    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">UGC工具</span>
-    <h3>AI游戏创作工具（TapTap制造）</h3>
-    <div class="desc">2026年2月上线，用户用自然语言描述游戏→AI约5分钟生成可玩Demo。无需编程和美术能力，一键发布到平台。</div>
-    <div class="insight">微信小游戏生态如果提供类似的AI创作→一键上架能力，可以极大降低UGC小游戏的创作门槛，让"人人都能做游戏"成为社区内容的新增量。</div>
+    <h3>TapTap制造：AI游戏创作工具</h3>
+    <div class="desc">2026年2月上线。用户用自然语言描述游戏→AI约5分钟生成可玩Demo。无需编程和美术能力，一键发布到平台。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：官方发布+36氪报道</div>
   </div>
 
-  <div class="card" data-dim="内容形态" data-source="TapTap">
-    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="TapTap">
+    <div class="card-top"><div class="card-source"><div class="logo">T</div><span class="name">TapTap</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">内容形态</span>
-    <h3>攻略模块占0.5%帖量却吸引50% DAU</h3>
-    <div class="desc">独立的攻略/教程板块虽然帖子数量极少，但吸引了平台一半的日活用户。说明结构化的实用内容需求远强于社交水贴。</div>
-    <div class="insight">微信游戏社区可以做一个轻量的"攻略/技巧"专区，哪怕内容量不大，但对拉动DAU的效果可能远超预期。关键是内容质量而不是数量。</div>
+    <h3>攻略模块：0.5%帖量吸引50%DAU</h3>
+    <div class="desc">独立攻略板块虽帖子数量极少，但吸引平台一半日活用户。说明结构化实用内容需求远强于社交水贴。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：产品分析文章</div>
   </div>
 
-  <!-- 米游社 -->
-  <div class="card" data-dim="激励体系" data-source="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="米游社">
+    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">激励体系</span>
     <h3>米游币日常任务循环</h3>
     <div class="desc">每天完成读帖、点赞、分享、签到赚币→兑换游戏物品或周边。月上限约7000币。形成"打开APP→做任务→获奖励"的强习惯循环。</div>
-    <div class="insight">微信游戏社区可以设计类似的轻量任务体系：每日浏览动态+点赞+评论=积分→兑换游戏礼包。关键是任务要足够轻，30秒内可完成。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：官方文档</div>
   </div>
 
-  <div class="card" data-dim="UGC工具" data-source="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="米游社">
+    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">UGC工具</span>
     <h3>战绩卡片一键生成</h3>
     <div class="desc">一键生成可分享的成就/深渊通关/探索进度图片卡。把"晒战绩"从截图+P图简化为一个按钮操作。</div>
-    <div class="insight">我们已有AI战报数据，如果做一个"一键生成分享卡"的功能，用户发帖的创作成本几乎为零。这直接降低了发帖门槛。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：官方功能</div>
   </div>
 
-  <div class="card" data-dim="社交功能" data-source="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="米游社">
+    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">社交功能</span>
-    <h3>导师系统</h3>
-    <div class="desc">连接老玩家和新玩家，新手入门引导+社交破冰。老玩家获得"导师"身份认同，新玩家获得归属感。</div>
-    <div class="insight">微信的关系链里天然存在"带你玩的朋友"。如果在社区中识别并强化这种mentor关系（比如"他带你入坑了XX游戏"），可以激活沉默的社交关系。</div>
+    <h3>导师系统：老带新社交破冰</h3>
+    <div class="desc">连接老玩家和新玩家，提供新手引导+社交破冰。老玩家获"导师"身份认同，新玩家获归属感。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="UGC工具" data-source="米游社">
-    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="米游社">
+    <div class="card-top"><div class="card-source"><div class="logo">米</div><span class="name">米游社</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">UGC工具</span>
-    <h3>阵容模拟器（组队方案分享）</h3>
-    <div class="desc">用户分享特定关卡的通关阵容（含角色/武器/圣遗物），社区可评分、讨论、复用。按场景筛选：深渊/探索/Boss。</div>
-    <div class="insight">王者荣耀等MOBA类游戏天然适合"阵容分享"。如果用户打完rank能一键发布"本局阵容+战绩"到社区，既是内容增量也是社交话题。</div>
+    <h3>阵容模拟器：通关方案共享</h3>
+    <div class="desc">用户分享特定关卡通关阵容（含角色/武器/圣遗物），社区可评分、讨论、复用。按场景筛选。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <!-- 小黑盒 -->
-  <div class="card" data-dim="UGC工具" data-source="小黑盒">
-    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="小黑盒">
+    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">UGC工具</span>
     <h3>一键成就海报</h3>
-    <div class="desc">自动从Steam数据生成可分享的视觉海报（徽章、游戏时长、成就进度）。极低创作成本的"炫耀"工具。</div>
-    <div class="insight">微信游戏中心已有"游戏新鲜事"数据（时长、段位、战绩），做一个自动生成精美海报的功能是现成的。重点在于海报设计要好看到"值得发朋友圈"。</div>
+    <div class="desc">自动从Steam数据生成可分享视觉海报（徽章、游戏时长、成就进度）。极低创作成本的"炫耀"工具。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：官方功能</div>
   </div>
 
-  <div class="card" data-dim="激励体系" data-source="小黑盒">
-    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="小黑盒">
+    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">激励体系</span>
     <h3>创作者三级认证 + "盒电"曝光加速</h3>
-    <div class="desc">Lv3/5/7三级创作者认证，逐级解锁更多权益。创作者赚取"盒电"虚拟币可推广自己文章的曝光。</div>
-    <div class="insight">微信游戏社区的创作者激励可以更轻量：不需要复杂的等级体系，但"发帖数据好→下次帖子自动获得更多曝光"的正循环机制值得借鉴。</div>
+    <div class="desc">Lv3/5/7三级认证逐级解锁权益。创作者赚取"盒电"可推广自己文章曝光量。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="内容形态" data-source="小黑盒">
-    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><span class="card-priority p3">🔵 纯灵感</span></div>
+  <div class="card" data-platform="小黑盒">
+    <div class="card-top"><div class="card-source"><div class="logo">盒</div><span class="name">小黑盒</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">内容形态</span>
     <h3>"探索模式"打破信息茧房</h3>
-    <div class="desc">算法刻意推荐用户平时不关注的游戏和话题，打破信息茧房。让用户接触多元化内容。</div>
-    <div class="insight">游戏社区容易形成圈层固化（只看王者/只看和平精英）。一个"今日发现"板块可以低成本地帮用户发现新游戏和新社区内容。</div>
+    <div class="desc">算法刻意推荐用户平时不关注的游戏和话题，让用户接触多元内容。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <!-- 好游快爆 -->
-  <div class="card" data-dim="互动机制" data-source="好游快爆">
-    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="好游快爆">
+    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">互动机制</span>
     <h3>开发者直连论坛</h3>
-    <div class="desc">玩家在专属论坛直接和游戏开发者沟通、反馈Bug、提建议。缩短了反馈链路，开发者也获得了一手用户声音。</div>
-    <div class="insight">微信小游戏开发者如果能在社区直接跟玩家对话，对独立开发者来说是极大的吸引力。这是一个拉开发者入驻的差异化卖点。</div>
+    <div class="desc">玩家在专属论坛直接和游戏开发者沟通、反馈Bug、提建议。缩短反馈链路。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="运营活动" data-source="好游快爆">
-    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="好游快爆">
+    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">运营活动</span>
-    <h3>礼仪考试（游戏化社区治理）</h3>
-    <div class="desc">用户通过社区行为规范测试才能解锁特定社交功能。把枯燥的"社区规则"变成了一个游戏化的小环节。</div>
-    <div class="insight">社区治理通常靠"违规后惩罚"，好游快爆做的是"参与前教育"。如果微信游戏社区想提升社区氛围，可以考虑入门引导的游戏化设计。</div>
+    <h3>礼仪考试：游戏化社区治理</h3>
+    <div class="desc">用户通过社区行为规范测试才能解锁特定社交功能。"参与前教育"替代"违规后惩罚"。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="激励体系" data-source="好游快爆">
-    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="好游快爆">
+    <div class="card-top"><div class="card-source"><div class="logo">爆</div><span class="name">好游快爆</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">激励体系</span>
-    <h3>爆米花经济（虚拟币兑换实物）</h3>
-    <div class="desc">签到、发帖、参与活动赚"爆米花"→兑换游戏礼包、实物周边、内测资格、试玩账号。</div>
-    <div class="insight">积分→兑换的循环对提活效果显著。关键是兑换物要有吸引力（游戏内物品比周边更有效），且获取路径要足够短（每天2分钟就能赚到）。</div>
+    <h3>爆米花经济：虚拟币兑换实物</h3>
+    <div class="desc">签到、发帖、活动赚"爆米花"→兑换游戏礼包、实物周边、内测资格、试玩账号。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <!-- NGA -->
-  <div class="card" data-dim="激励体系" data-source="NGA">
-    <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="NGA">
+    <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">激励体系</span>
     <h3>双轨信用体系（积分+威望）</h3>
-    <div class="desc">"积分"衡量活跃度，"威望"衡量内容质量。两者独立追踪，威望达不同等级解锁不同特权。负威望会触发禁言。</div>
-    <div class="insight">简单的"活跃=奖励"容易导致灌水。分离"活跃"和"质量"两个维度，让高质量创作者获得差异化认可，对社区内容质量的长期维护有价值。</div>
+    <div class="desc">"积分"衡量活跃度，"威望"衡量内容质量。两者独立追踪，威望达不同等级解锁不同特权。负威望触发禁言。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="内容形态" data-source="NGA">
-    <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><span class="card-priority p3">🔵 纯灵感</span></div>
+  <div class="card" data-platform="NGA">
+    <div class="card-top"><div class="card-source"><div class="logo">N</div><span class="name">NGA</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">内容形态</span>
-    <h3>帖子版本标记+定期"复活"机制</h3>
-    <div class="desc">帖子自动标注适用游戏版本。过期攻略被归档。高价值旧帖（>180天）会定期"复活"，让社区投票是否仍适用。</div>
-    <div class="insight">游戏内容有时效性（版本更新后攻略可能过时）。一个"内容保鲜"机制可以避免用户看到过时信息的体验问题。</div>
+    <h3>帖子版本标记+定期"复活"</h3>
+    <div class="desc">帖子自动标注适用游戏版本。过期攻略归档，高价值旧帖定期复活让社区投票是否仍适用。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <!-- 小红书 -->
-  <div class="card" data-dim="社交功能" data-source="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="小红书">
+    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">社交功能</span>
-    <h3>共享收藏夹（协作式内容策展）</h3>
-    <div class="desc">创建协作收藏夹，邀请最多10个朋友共同收藏内容。用于"国庆旅行攻略""美食清单"等集体决策场景。</div>
-    <div class="insight">直接可迁移："开黑攻略合集""这游戏怎么玩"等场景。几个朋友一起收藏有用的攻略帖，形成一个小型知识库。这是工具带动社交的典型设计。</div>
+    <h3>共享收藏夹：10人协作策展</h3>
+    <div class="desc">创建协作收藏夹，邀请最多10个朋友共同收藏内容。解决"集体决策"痛点，工具驱动社交。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：媒体分析</div>
   </div>
 
-  <div class="card" data-dim="互动机制" data-source="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="小红书">
+    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">互动机制</span>
-    <h3>语音现场（即时语音聊天室）</h3>
-    <div class="desc">内测中的音频聊天室功能，用户可以发起或加入主题语音讨论，支持匿名参与。</div>
-    <div class="insight">游戏社区天然适合语音互动（开黑本来就用语音）。如果在社区内提供轻量的"语音房"功能，可以承接"约人打游戏"的场景。</div>
+    <h3>语音现场：即时语音聊天室</h3>
+    <div class="desc">内测音频聊天室，用户可发起或加入主题语音讨论，支持匿名。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：媒体报道</div>
   </div>
 
-  <div class="card" data-dim="内容形态" data-source="小红书">
-    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="小红书">
+    <div class="card-top"><div class="card-source"><div class="logo">红</div><span class="name">小红书</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">内容形态</span>
     <h3>游戏内容生活化（1.1亿月活游戏用户）</h3>
-    <div class="desc">小红书的游戏内容不是硬核攻略，而是"生活化分享"——游戏穿搭、角色周边、Cosplay、二创同人。85%用户是Z世代，70%女性。</div>
-    <div class="insight">微信游戏社区如果想拓展用户群（尤其女性和休闲玩家），可以鼓励"生活化"的游戏内容，而不只是战绩和攻略。降低"游戏社区=硬核"的刻板印象。</div>
+    <div class="desc">游戏内容不是硬核攻略，而是生活化分享——游戏穿搭、角色周边、Cosplay、二创。85%Z世代，70%女性。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：官方数据+媒体</div>
   </div>
 
-  <!-- 即刻 -->
-  <div class="card" data-dim="互动机制" data-source="即刻">
-    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><span class="card-priority p1">🟢 直接可用</span></div>
+  <div class="card" data-platform="即刻">
+    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">互动机制</span>
     <h3>48小时限时日记</h3>
-    <div class="desc">日记帖对他人可见48小时后自动隐藏（仅自己可看）。发布日记会点亮头像光圈。设计哲学：减轻社交压力，鼓励真实表达。</div>
-    <div class="insight">非常适合游戏社区：每日游戏心情/高光时刻发一条"48小时可见"的轻量动态。没有永久记录的压力→用户更愿意发→发帖量上升→社区活跃度提升。</div>
+    <div class="desc">日记帖对他人可见48小时后自动隐藏。发布日记点亮头像光圈。留存率63%远超行业均值。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：媒体分析</div>
   </div>
 
-  <div class="card" data-dim="社交功能" data-source="即刻">
-    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="即刻">
+    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">社交功能</span>
     <h3>"松圈主义"弱关系设计</h3>
-    <div class="desc">定位在微信（强关系）和陌生人社交之间。用户可以自由在深度参与和随意浏览之间切换，没有社交义务。去掉了私信功能以减少骚扰。</div>
-    <div class="insight">微信游戏社区的用户关系介于"微信好友"和"圈子里的陌生人"之间。允许用户自由调节社交深度（而不是强制互动）是长期留存的关键。</div>
+    <div class="desc">定位在微信和陌生人社交之间。可自由切换深度参与和随意浏览。去掉私信减少骚扰。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="运营活动" data-source="即刻">
-    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><span class="card-priority p3">🔵 纯灵感</span></div>
+  <div class="card" data-platform="即刻">
+    <div class="card-top"><div class="card-source"><div class="logo">即</div><span class="name">即刻</span></div><div class="card-tags"><span class="card-tag tag-media">媒体</span></div></div>
     <span class="card-dim">运营活动</span>
-    <h3>线下"面即"活动 + 打卡弹幕工具</h3>
-    <div class="desc">组织线下聚会（吃饭、打游戏、看电影），用"面即打卡"工具生成多人互动弹幕图。留存率63%，远超行业均值。</div>
-    <div class="insight">线下开黑聚会+线上社区记录的闭环。如果微信游戏社区提供"开黑打卡"工具（几个人一起玩→自动生成合照/记录），可以把线下社交行为沉淀到线上。</div>
+    <h3>"面即"线下活动+打卡弹幕工具</h3>
+    <div class="desc">组织线下聚会，用打卡工具生成多人互动弹幕图。线下社交行为沉淀到线上。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <!-- Discord -->
-  <div class="card" data-dim="社交功能" data-source="Discord">
-    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><span class="card-priority p2">🟡 可参考</span></div>
+  <div class="card" data-platform="Discord">
+    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span></div></div>
     <span class="card-dim">社交功能</span>
-    <h3>Forum Channel（结构化讨论频道）</h3>
-    <div class="desc">专门的论坛型频道，支持主题帖+标签+搜索。适合FAQ、攻略、反馈收集、阵容分享等需要长期沉淀的内容。不活跃的帖子自动归档。</div>
-    <div class="insight">微信游戏社区的"圈子"已有论坛形态，但缺乏结构化。如果在圈子内做一个"精华帖/置顶帖"体系，能让优质内容长期被发现而不是被新帖冲掉。</div>
+    <h3>Forum Channel：结构化讨论频道</h3>
+    <div class="desc">论坛型频道支持主题帖+标签+搜索。适合FAQ、攻略、反馈收集。不活跃帖自动归档。</div>
+    <div class="card-date">收录：2026.05.20</div>
   </div>
 
-  <div class="card" data-dim="互动机制" data-source="Discord">
-    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><span class="card-priority p3">🔵 纯灵感</span></div>
+  <div class="card" data-platform="Discord">
+    <div class="card-top"><div class="card-source"><div class="logo">D</div><span class="name">Discord</span></div><div class="card-tags"><span class="card-tag tag-official">官方</span><span class="card-tag tag-hot">🔥</span></div></div>
     <span class="card-dim">互动机制</span>
-    <h3>服务器内购物/送礼</h3>
-    <div class="desc">2025年12月推出：用户可以在游戏社区内直接购买/赠送游戏物品（如Marvel Rivals皮肤），无需离开社区。</div>
-    <div class="insight">微信支付+小游戏道具体系天然支持这个。如果在社区内做"给队友送道具"的能力，既是社交行为又是变现路径。</div>
-  </div>
-
-  <!-- 行业趋势 -->
-  <div class="card" data-dim="社交功能" data-source="行业趋势">
-    <div class="card-top"><div class="card-source"><div class="logo">🔥</div><span class="name">行业趋势 2026</span></div><span class="card-priority p2">🟡 可参考</span></div>
-    <span class="card-dim">社交功能</span>
-    <h3>AI社交匹配（互动成功率+47%）</h3>
-    <div class="desc">基于玩法偏好和行为数据的算法推荐搭子/队友，部分平台报告互动成功率提升约47%。</div>
-    <div class="insight">微信有最完整的用户行为数据（游戏时长、游戏类型、在线时间段）。AI匹配"你可能想跟TA一起玩"的推荐，比手动找人的体验好几个量级。</div>
+    <h3>服务器内购物/送礼（2025.12上线）</h3>
+    <div class="desc">用户在游戏社区内直接购买/赠送游戏物品，无需离开社区。</div>
+    <div class="card-date">收录：2026.05.20 · 来源：官方公告</div>
   </div>
 
 </div>
+</div>
+
+<!-- ===== 板块2：社区热点（待建设） ===== -->
+<div class="tab-content" id="tab-trends">
+  <div class="empty">
+    <p>🚧 社区热点板块建设中</p>
+    <p style="margin-top:8px;font-size:12px;">将收录各社区讨论度高的话题、玩家关注的内容趋势</p>
+  </div>
+</div>
 
 <script>
-function filterCards(dim){
+function switchTab(tab){
+  document.querySelectorAll('.tab-nav .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+function filterPlatform(platform){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   event.target.classList.add('active');
-  document.querySelectorAll('.card').forEach(c=>{
-    if(dim==='all'||c.dataset.dim===dim){c.style.display='block';}
+  document.querySelectorAll('#card-grid .card').forEach(c=>{
+    if(platform==='all'||c.dataset.platform===platform){c.style.display='block';}
     else{c.style.display='none';}
   });
 }
